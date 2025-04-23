@@ -21,6 +21,9 @@ if (!pineconeApiKey) {
 if (!openaiApiKey) {
   throw new Error("OPENAI_API_KEY is not set");
 }
+if (!anthropicApiKey) {
+  throw new Error("ANTHROPIC_API_KEY is not set");
+}
 
 // Initialize Pinecone
 const pineconeClient = new Pinecone({

@@ -158,7 +158,7 @@ export async function queueAssistantResponse({
   error_message,
   temperature,
 }: QueueAssistantResponseParams) {
-  if (providerName === "openai" || providerName === "fireworks") {
+  if (providerName === "openai" || providerName === "fireworks" || providerName === "llama") {
     console.log(providerName);
     await handleOpenAIStream({
       controller,

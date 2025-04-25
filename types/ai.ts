@@ -24,7 +24,8 @@ export interface AIProviders {
   openai: OpenAI;
   anthropic: Anthropic;
   fireworks: OpenAI; // Fireworks doesn't have an SDK, they modify OpenAI's
+  llama: OpenAI; // Llama can be accessed via OpenAI compatible API
 }
 
-export const providerNameSchema = z.enum(["openai", "anthropic", "fireworks"]);
+export const providerNameSchema = z.enum(["openai", "anthropic", "fireworks", "llama"]);
 export type ProviderName = z.infer<typeof providerNameSchema>;

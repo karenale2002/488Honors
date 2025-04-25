@@ -13,6 +13,8 @@ const pineconeApiKey = process.env.PINECONE_API_KEY;
 const openaiApiKey = process.env.OPENAI_API_KEY;
 const anthropicApiKey = process.env.ANTHROPIC_API_KEY;
 const fireworksApiKey = process.env.FIREWORKS_API_KEY;
+const llamaApiKey = process.env.LLAMA_API_KEY;
+const llamaBaseUrl = process.env.LLAMA_BASE_URL || "https://api.together.xyz/v1"; // Default to Together.ai
 
 // Check if API keys are set
 if (!pineconeApiKey) {
@@ -21,8 +23,8 @@ if (!pineconeApiKey) {
 if (!openaiApiKey) {
   throw new Error("OPENAI_API_KEY is not set");
 }
-if (!anthropicApiKey) {
-  throw new Error("ANTHROPIC_API_KEY is not set");
+if (!llamaApiKey) {
+  throw new Error("LLAMA_API_KEY is not set");
 }
 
 // Initialize Pinecone
@@ -42,10 +44,15 @@ const fireworksClient = new OpenAI({
   baseURL: "https://api.fireworks.ai/inference/v1",
   apiKey: fireworksApiKey,
 });
+const llamaClient = new OpenAI({
+  baseURL: llamaBaseUrl,
+  apiKey: llamaApiKey,
+});
 const providers: AIProviders = {
   openai: openaiClient,
   anthropic: anthropicClient,
   fireworks: fireworksClient,
+  llama: llamaClient,
 };
 
 async function determineIntention(chat: Chat): Promise<Intention> {
